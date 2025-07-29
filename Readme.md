@@ -21,7 +21,7 @@ npm run dev
 npm run build
 
 
-NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api
+NEXT_PUBLIC_API_BASE_URL=https://real-estate-insights-platform-1.onrender.com/
 
 
 cd backend

@@ -39,7 +39,7 @@ export function EnhancedExport() {
     setIsGenerating(true)
 
     try {
-      const response = await fetch("http://localhost:5000/api/export", {
+      const response = await fetch("https://real-estate-insights-platform-1.onrender.com/api/export", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(config),
@@ -52,7 +52,7 @@ export function EnhancedExport() {
         setRecentReports((prev) => [data.data, ...prev.slice(0, 4)])
 
         // Download the file
-        const downloadUrl = `http://localhost:5000${data.data.download_url}`
+        const downloadUrl = `https://real-estate-insights-platform-1.onrender.com/${data.data.download_url}`
         const link = document.createElement("a")
         link.href = downloadUrl
         link.download = data.data.filename
@@ -322,7 +322,7 @@ export function EnhancedExport() {
                     size="sm"
                     onClick={() => {
                       const link = document.createElement("a")
-                      link.href = `http://localhost:5000${report.download_url}`
+                      link.href = `https://real-estate-insights-platform-1.onrender.com/${report.download_url}`
                       link.download = report.filename
                       document.body.appendChild(link)
                       link.click()

@@ -75,7 +75,7 @@ export function ProjectCRUD() {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/projects")
+      const response = await fetch("https://real-estate-insights-platform-1.onrender.com/api/projects")
       const data = await response.json()
       if (data.success) {
         setProjects(data.data)
@@ -118,8 +118,8 @@ export function ProjectCRUD() {
     setLoading(true)
     try {
       const url = editingProject
-        ? `http://localhost:5000/api/projects/${editingProject.id}`
-        : "http://localhost:5000/api/projects"
+        ? `https://real-estate-insights-platform-1.onrender.com/api/projects/${editingProject.id}`
+        : "https://real-estate-insights-platform-1.onrender.com/api/projects"
       const method = editingProject ? "PUT" : "POST"
       const response = await fetch(url, {
         method,
@@ -169,7 +169,7 @@ export function ProjectCRUD() {
 
   const handleDelete = async (projectId: number) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/projects/${projectId}`, {
+      const response = await fetch(`https://real-estate-insights-platform-1.onrender.com/api/projects/${projectId}`, {
         method: "DELETE",
       })
       const data = await response.json()
@@ -541,7 +541,7 @@ export function CompetitorCRUD() {
 
   const fetchCompetitors = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/competitors")
+      const response = await fetch("https://real-estate-insights-platform-1.onrender.com/api/competitors")
       const data = await response.json()
       if (data.success) {
         setCompetitors(data.data)
@@ -580,8 +580,8 @@ export function CompetitorCRUD() {
     setLoading(true)
     try {
       const url = editingCompetitor
-        ? `http://localhost:5000/api/competitors/${editingCompetitor.id}`
-        : "http://localhost:5000/api/competitors"
+        ? `https://real-estate-insights-platform-1.onrender.com/api/competitors/${editingCompetitor.id}`
+        : "https://real-estate-insights-platform-1.onrender.com/api/competitors"
       const method = editingCompetitor ? "PUT" : "POST"
       const response = await fetch(url, {
         method,
@@ -627,7 +627,7 @@ export function CompetitorCRUD() {
 
   const handleDelete = async (competitorId: number) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/competitors/${competitorId}`, {
+      const response = await fetch(`https://real-estate-insights-platform-1.onrender.com/api/competitors/${competitorId}`, {
         method: "DELETE",
       })
       const data = await response.json()
