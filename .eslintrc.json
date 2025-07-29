@@ -9,18 +9,10 @@
     "prefer-const": "warn",
     "no-console": "off"
   },
-  "overrides": [
-    {
-      "files": [
-        "*.ts",
-        "*.tsx"
-      ],
-      "excludedFiles": [
-        "node_modules/**",
-        ".next/**",
-        "out/**",
-        "build/**"
-      ]
-    }
+  "ignorePatterns": [
+    "node_modules/",
+    ".next/",
+    "out/",
+    "build/"
   ]
 }
