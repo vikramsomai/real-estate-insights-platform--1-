@@ -110,7 +110,7 @@ jobs:
 
       - name: Deploy Backend to Render (Staging)
         run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_STAGING }}
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
 
   # Deploy to Production
   deploy-production:
@@ -129,4 +129,4 @@ jobs:
 
       - name: Deploy Backend to Render (Prod)
         run: | 
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_PROD }}
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
