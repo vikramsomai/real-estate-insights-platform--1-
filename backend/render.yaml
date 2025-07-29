@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: your-backend
+    runtime: python
+    pythonVersion: 3.10.12
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: gunicorn simple_app:app
