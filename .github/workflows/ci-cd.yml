@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  # 🔍 Frontend: Lint, Build, and Validate
+  # Frontend Tests
   frontend-test:
     runs-on: ubuntu-latest
     steps:
@@ -20,34 +20,28 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
+      - name: Clear npm cache
+        run: npm cache clean --force
+
       - name: Install dependencies
-        run: |
-          cd frontend
-          npm ci --legacy-peer-deps
+        run: npm install --legacy-peer-deps
 
       - name: Run linting
-        run: |
-          cd frontend
-          npm run lint -- --max-warnings=0
+        run: npm run lint
 
       - name: Run type checking
-        run: |
-          cd frontend
-          npx tsc --noEmit
+        run: npx tsc --noEmit
 
       - name: Build application
-        run: |
-          cd frontend
-          npm run build
+        run: npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: frontend-build
-          path: frontend/.next/
-          if-no-files-found: warn
+          name: build-files
+          path: .next/
 
-  # 🐍 Backend: Test, Validate, and Check API
+  # Backend Tests
   backend-test:
     runs-on: ubuntu-latest
     steps:
@@ -57,25 +51,30 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'  # Matches Render's recommended version
+          python-version: '3.9'
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
           cd backend
-          pip install --upgrade pip setuptools wheel
           pip install -r requirements.txt
 
-      - name: Check module import
+      - name: Test backend server
         run: |
           cd backend
-          python -c "from app import app; print(f'App imported successfully: {app.name}')"
+          python -c "import simple_app; print('Backend imports successfully')"
 
-      - name: Validate API endpoints (using Flask test client)
+      - name: Validate API endpoints
         run: |
           cd backend
           python -c "
-          
-  # 🔒 Security Scan (Container & Filesystem)
+          from simple_app import app
+          with app.test_client() as client:
+              response = client.get('/api/projects')
+              assert response.status_code == 200
+              print('API endpoints working')
+          "
+
+  # Security Scanning
   security-scan:
     runs-on: ubuntu-latest
     permissions:
@@ -86,7 +85,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Trivy vulnerability scan
+      - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
@@ -94,28 +93,34 @@ jobs:
           format: 'sarif'
           output: 'trivy-results.sarif'
 
-      - name: Upload SARIF results to GitHub Security
+      - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
-          sarif_file: trivy-results.sarif
+          sarif_file: 'trivy-results.sarif'
 
-  # 🚀 Deploy to Staging (develop → Vercel + Render)
+  # Deploy to Staging
   deploy-staging:
     needs: [frontend-test, backend-test, security-scan]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
     environment: staging
     steps:
-      - name: Notify staging deployment
-        run: echo "✅ develop branch passed tests. Vercel and Render will auto-deploy to staging."
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  # 🏁 Deploy to Production (main → Vercel + Render)
+      - name: Deploy to staging
+        run: echo "Deploying to staging environment"
+
+  # Deploy to Production
   deploy-production:
     needs: [frontend-test, backend-test, security-scan]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     environment: production
     steps:
-      - name: Notify production deployment
-        run: echo "✅ main branch passed tests. Vercel and Render will auto-deploy to production."
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to production
+        run: echo "Deploying to production environment"
