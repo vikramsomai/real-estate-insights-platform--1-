@@ -34,8 +34,6 @@ import { ProjectCRUD, CompetitorCRUD } from "@/components/crud-operations"
 import { StatisticsDashboard } from "@/components/statistics-dashboard"
 import { AuthProvider, useAuth, ProtectedRoute, UserProfile } from "@/components/role-based-auth"
 import { fetchAnalytics, useBackendStatus } from "@/components/api-integration"
-import { UMLDiagrams } from "@/components/uml-diagrams"
-import { Wireframes } from "@/components/wireframes"
 import { EnhancedCharts } from "@/components/enhanced-charts"
 
 function DashboardContent() {
@@ -259,14 +257,6 @@ function DashboardContent() {
                 <ProtectedRoute requiredPermission="export">
                   <EnhancedExport />
                 </ProtectedRoute>
-              </TabsContent>
-
-              <TabsContent value="uml" className="space-y-6 mt-0">
-                <UMLDiagrams />
-              </TabsContent>
-
-              <TabsContent value="wireframes" className="space-y-6 mt-0">
-                <Wireframes />
               </TabsContent>
 
               {user?.role === "admin" && (

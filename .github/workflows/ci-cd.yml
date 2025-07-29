@@ -108,11 +108,15 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      - name: Deploy to Vercel Staging
+      - name: Deploy to Vercel (Staging)
         run: vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Deploy Backend to Railway (Staging)
+        run: curl -X POST https://backboard.railway.app/project/${{ secrets.RAILWAY_PROJECT_ID }}/deploy \
+              -H "Authorization: Bearer ${{ secrets.RAILWAY_TOKEN }}"
 
   deploy-production:
     needs: [frontend-test, backend-test, security-scan]
@@ -126,8 +130,12 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      - name: Deploy to Vercel Production
+      - name: Deploy to Vercel (Production)
         run: vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Deploy Backend to Railway (Production)
+        run: curl -X POST https://backboard.railway.app/project/${{ secrets.RAILWAY_PROJECT_ID }}/deploy \
+              -H "Authorization: Bearer ${{ secrets.RAILWAY_TOKEN }}"
