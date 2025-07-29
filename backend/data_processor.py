@@ -86,11 +86,11 @@ class DataProcessor:
             conn.commit()
             conn.close()
             
-            self.logger.info(f"✅ Updated progress for {updated_count} projects")
+            self.logger.info(f" Updated progress for {updated_count} projects")
             return updated_count
             
         except Exception as e:
-            self.logger.error(f"❌ Error updating project progress: {e}")
+            self.logger.error(f" Error updating project progress: {e}")
             return 0
     
     def update_sales_data(self):
@@ -144,11 +144,11 @@ class DataProcessor:
             conn.commit()
             conn.close()
             
-            self.logger.info(f"✅ Updated sales data for {updated_count} projects")
+            self.logger.info(f"Updated sales data for {updated_count} projects")
             return updated_count
             
         except Exception as e:
-            self.logger.error(f"❌ Error updating sales data: {e}")
+            self.logger.error(f"Error updating sales data: {e}")
             return 0
     
     def update_analytics_metrics(self):
@@ -198,7 +198,7 @@ class DataProcessor:
             conn.commit()
             conn.close()
             
-            self.logger.info(f"✅ Updated analytics metrics for {current_month}")
+            self.logger.info(f"Updated analytics metrics for {current_month}")
             self.logger.info(f"   Revenue: {total_revenue/1000000:.1f}M SAR")
             self.logger.info(f"   Units Sold: {total_units_sold}")
             self.logger.info(f"   Market Share: {market_share:.1f}%")
@@ -206,7 +206,7 @@ class DataProcessor:
             return True
             
         except Exception as e:
-            self.logger.error(f"❌ Error updating analytics metrics: {e}")
+            self.logger.error(f"Error updating analytics metrics: {e}")
             return False
     
     def update_competitor_data(self):
@@ -245,11 +245,11 @@ class DataProcessor:
             conn.commit()
             conn.close()
             
-            self.logger.info(f"✅ Updated {updated_count} competitors")
+            self.logger.info(f"Updated {updated_count} competitors")
             return updated_count
             
         except Exception as e:
-            self.logger.error(f"❌ Error updating competitor data: {e}")
+            self.logger.error(f" Error updating competitor data: {e}")
             return 0
     
     def generate_daily_report(self):
@@ -290,11 +290,11 @@ class DataProcessor:
             
             conn.close()
             
-            self.logger.info(f"✅ Generated daily report: {report_filename}")
+            self.logger.info(f"Generated daily report: {report_filename}")
             return report_filename
             
         except Exception as e:
-            self.logger.error(f"❌ Error generating daily report: {e}")
+            self.logger.error(f"Error generating daily report: {e}")
             return None
     
     def run_full_update(self):
@@ -316,7 +316,7 @@ class DataProcessor:
         # Generate daily report
         report_generated = self.generate_daily_report()
         
-        self.logger.info("✅ Full data processing cycle completed!")
+        self.logger.info(" Full data processing cycle completed!")
         self.logger.info(f"   Projects updated: {projects_updated}")
         self.logger.info(f"   Sales updated: {sales_updated}")
         self.logger.info(f"   Analytics updated: {analytics_updated}")
@@ -335,15 +335,15 @@ def main():
     schedule.every().day.at("08:00").do(processor.generate_daily_report)
     schedule.every().day.at("18:00").do(processor.run_full_update)
     
-    print("🤖 Al Fozan Data Processor Started")
-    print("📊 Scheduled tasks:")
+    print(" Al Fozan Data Processor Started")
+    print(" Scheduled tasks:")
     print("   - Project progress: Every hour")
     print("   - Sales data: Every 2 hours")
     print("   - Analytics: Every 4 hours")
     print("   - Competitors: Every 6 hours")
     print("   - Daily report: 8:00 AM")
     print("   - Full update: 6:00 PM")
-    print("\n⏰ Running scheduled tasks...")
+    print("\n Running scheduled tasks...")
     
     # Run initial update
     processor.run_full_update()
