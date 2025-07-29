@@ -58,13 +58,14 @@ jobs:
       - name: Validate API endpoints
         run: |
           cd backend
-          python -c "
+          echo "
           from simple_app import app
           with app.test_client() as client:
               response = client.get('/api/projects')
               assert response.status_code == 200
               print('API endpoints working')
-          "
+          " > test_api.py
+          python test_api.py
 
   security-scan:
     runs-on: ubuntu-latest
