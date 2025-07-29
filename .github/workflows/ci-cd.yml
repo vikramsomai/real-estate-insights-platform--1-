@@ -50,7 +50,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           cd backend
-          pip install -r simple_requirements.txt
+          pip install -r requirements.txt
 
       - name: Test backend server
         run: |
@@ -103,8 +103,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy to staging
-        run: echo "Deploying to staging environment"
+      - name: Deploy Frontend to Vercel (Staging)
+        run: |
+          npm i -g vercel
+          vercel --token=${{ secrets.VERCEL_TOKEN }} --prod --confirm
+
+      - name: Deploy Backend to Render (Staging)
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_STAGING }}
 
   # Deploy to Production
   deploy-production:
@@ -116,5 +122,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy to production
-        run: echo "Deploying to production environment"
+      - name: Deploy Frontend to Vercel (Prod)
+        run: |
+          npm i -g vercel
+          vercel --token=${{ secrets.VERCEL_TOKEN }} --prod --confirm
+
+      - name: Deploy Backend to Render (Prod)
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_PROD }}
