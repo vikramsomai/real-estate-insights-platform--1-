@@ -3,6 +3,7 @@ from flask_cors import CORS
 import json
 from datetime import datetime, timedelta
 import random
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -221,4 +222,5 @@ if __name__ == '__main__':
     print("- GET /api/analytics")
     print("- POST /api/auth/login")
     print("- POST /api/export")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
