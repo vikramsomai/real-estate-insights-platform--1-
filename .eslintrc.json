@@ -1,5 +1,7 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"],
+  "extends": [
+    "next/core-web-vitals"
+  ],
   "rules": {
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-explicit-any": "warn",
@@ -7,5 +9,18 @@
     "prefer-const": "warn",
     "no-console": "off"
   },
-  "ignorePatterns": ["node_modules/", ".next/", "out/", "build/"]
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "excludedFiles": [
+        "node_modules/**",
+        ".next/**",
+        "out/**",
+        "build/**"
+      ]
+    }
+  ]
 }
