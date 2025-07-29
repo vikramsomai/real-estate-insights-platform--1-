@@ -64,6 +64,6 @@ export async function GET(request: Request) {
       data: analyticsData,
     })
   } catch (error) {
-    return NextResponse.json({ success: false, error: "Failed to fetch analytics data" }, { status: 500 })
+    return NextResponse.json({ success: false, error: "Failed to fetch analytics data" + error }, { status: 500 })
   }
 }
