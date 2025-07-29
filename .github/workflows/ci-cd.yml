@@ -22,6 +22,9 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Install required peer dependencies
+        run: npm install react-is --save
+
       - name: Run linting
         run: npm run lint || echo "Lint failed but continuing..."
 
