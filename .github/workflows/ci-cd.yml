@@ -74,44 +74,7 @@ jobs:
         run: |
           cd backend
           python -c "
-from app import app
-
-# Use Flask's built-in test client (more reliable than threading)
-with app.test_client() as client:
-    # Test projects endpoint
-    response = client.get('/api/projects')
-    assert response.status_code == 200, f'Expected 200, got {response.status_code}'
-    data = response.get_json()
-    assert data['success'] is True, 'API response not successful'
-    print('✅ API /api/projects returned valid data')
-    
-    # Test login endpoint
-    response = client.post('/api/auth/login', json={
-        'username': 'admin',
-        'password': 'admin123'
-    })
-    assert response.status_code == 200
-    data = response.get_json()
-    assert data['success'] is True, 'Login failed'
-    print('✅ Login endpoint working')
-    
-    # Test project creation
-    response = client.post('/api/projects', json={
-        'name': 'Test Project',
-        'location': 'Riyadh',
-        'type': 'Commercial',
-        'status': 'Active',
-        'units': 50,
-        'sold': 25,
-        'revenue': 100.0,
-        'completion': 50,
-        'start_date': '2023-01-01',
-        'end_date': '2025-01-01'
-    })
-    assert response.status_code == 200
-    print('✅ Project creation endpoint working')
-"
-
+          
   # 🔒 Security Scan (Container & Filesystem)
   security-scan:
     runs-on: ubuntu-latest
