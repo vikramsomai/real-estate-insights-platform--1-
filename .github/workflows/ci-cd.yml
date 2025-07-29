@@ -49,7 +49,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11.8'
+          python-version: '3.9'
 
       - name: Install Python dependencies
         run: |
@@ -65,12 +65,12 @@ jobs:
         run: |
           cd backend
           python -c "
-from simple_app import app
-with app.test_client() as client:
-    response = client.get('/api/projects')
-    assert response.status_code == 200
-    print('API endpoints working')
-"
+          from simple_app import app
+          with app.test_client() as client:
+              response = client.get('/api/projects')
+              assert response.status_code == 200
+              print('API endpoints working')
+          "
 
   security-scan:
     runs-on: ubuntu-latest
