@@ -94,7 +94,7 @@ export function ProjectCRUD() {
 
   useEffect(() => {
     fetchProjects()
-  }, [])
+  }, [fetchProjects])
 
   const resetForm = () => {
     setFormData({
