@@ -26,10 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Run linting (ignore warnings)
-        run: |
-        npm run lint || true
-
+      - name: Run linting
+        run: npm run lint
 
       - name: Run type checking
         run: npx tsc --noEmit
