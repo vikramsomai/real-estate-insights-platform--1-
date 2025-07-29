@@ -1,7 +1,5 @@
 "use client"
-
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -118,22 +116,17 @@ export function ProjectCRUD() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-
     try {
       const url = editingProject
         ? `http://localhost:5000/api/projects/${editingProject.id}`
         : "http://localhost:5000/api/projects"
-
       const method = editingProject ? "PUT" : "POST"
-
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
-
       const data = await response.json()
-
       if (data.success) {
         toast({
           title: "Success",
@@ -179,9 +172,7 @@ export function ProjectCRUD() {
       const response = await fetch(`http://localhost:5000/api/projects/${projectId}`, {
         method: "DELETE",
       })
-
       const data = await response.json()
-
       if (data.success) {
         toast({
           title: "Success",
@@ -509,7 +500,8 @@ export function ProjectCRUD() {
                           <AlertDialogHeader>
                             <AlertDialogTitle>Delete Project</AlertDialogTitle>
                             <AlertDialogDescription>
-                              Are you sure you want to delete "{project.name}"? This action cannot be undone.
+                              {/* FIXED: Using template literal to properly escape quotes */}
+                              {`Are you sure you want to delete "${project.name}"? This action cannot be undone.`}
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
@@ -586,22 +578,17 @@ export function CompetitorCRUD() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-
     try {
       const url = editingCompetitor
         ? `http://localhost:5000/api/competitors/${editingCompetitor.id}`
         : "http://localhost:5000/api/competitors"
-
       const method = editingCompetitor ? "PUT" : "POST"
-
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
-
       const data = await response.json()
-
       if (data.success) {
         toast({
           title: "Success",
@@ -643,9 +630,7 @@ export function CompetitorCRUD() {
       const response = await fetch(`http://localhost:5000/api/competitors/${competitorId}`, {
         method: "DELETE",
       })
-
       const data = await response.json()
-
       if (data.success) {
         toast({
           title: "Success",
@@ -877,7 +862,8 @@ export function CompetitorCRUD() {
                           <AlertDialogHeader>
                             <AlertDialogTitle>Delete Competitor</AlertDialogTitle>
                             <AlertDialogDescription>
-                              Are you sure you want to delete "{competitor.name}"? This action cannot be undone.
+                              {/* FIXED: Using template literal to properly escape quotes */}
+                              {`Are you sure you want to delete "${competitor.name}"? This action cannot be undone.`}
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
