@@ -2,12 +2,11 @@ name: Al Fozan Insights Platform CI/CD
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  # Frontend Tests
   frontend-test:
     runs-on: ubuntu-latest
     steps:
@@ -20,11 +19,11 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      - name: Clear npm cache
-        run: npm cache clean --force
-
       - name: Install dependencies
         run: npm install --legacy-peer-deps
+
+      - name: Install required peer dependencies
+        run: npm install react-is --save
 
       - name: Build application
         run: npm run build
@@ -35,7 +34,6 @@ jobs:
           name: build-files
           path: .next/
 
-  # Backend Tests
   backend-test:
     runs-on: ubuntu-latest
     steps:
@@ -50,7 +48,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           cd backend
-          pip install -r requirements.txt
+          pip install -r simple_requirements.txt
 
       - name: Test backend server
         run: |
@@ -68,7 +66,6 @@ jobs:
               print('API endpoints working')
           "
 
-  # Security Scanning
   security-scan:
     runs-on: ubuntu-latest
     permissions:
@@ -87,13 +84,12 @@ jobs:
           format: 'sarif'
           output: 'trivy-results.sarif'
 
-      - name: Upload Trivy scan results to GitHub Security tab
+      - name: Upload Trivy scan results
         uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: 'trivy-results.sarif'
 
-  # Deploy to Staging
   deploy-staging:
     needs: [frontend-test, backend-test, security-scan]
     runs-on: ubuntu-latest
@@ -103,10 +99,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy to staging
-        run: echo "Deploying to staging environment"
+      - name: Install Vercel CLI
+        run: npm install -g vercel
 
-  # Deploy to Production
+      - name: Deploy to Vercel (Staging)
+        run: vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Deploy Backend to Railway (Staging)
+        run: curl -X POST https://backboard.railway.app/project/${{ secrets.RAILWAY_PROJECT_ID }}/deploy \
+              -H "Authorization: Bearer ${{ secrets.RAILWAY_TOKEN }}"
+
   deploy-production:
     needs: [frontend-test, backend-test, security-scan]
     runs-on: ubuntu-latest
@@ -116,5 +121,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy to production
-        run: echo "Deploying to production environment"
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Deploy to Vercel (Production)
+        run: vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Deploy Backend to Railway (Production)
+        run: curl -X POST https://backboard.railway.app/project/${{ secrets.RAILWAY_PROJECT_ID }}/deploy \
+              -H "Authorization: Bearer ${{ secrets.RAILWAY_TOKEN }}"
