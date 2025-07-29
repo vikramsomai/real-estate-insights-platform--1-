@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { mockProjects, mockCompetitors, mockAnalytics, mockUser } from "./mock-data-fallback"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://real-estate-insights-platform-1.onrender.com/api"
 const CONNECTION_TIMEOUT = 5000 // 5 seconds
 
 interface ApiResponse<T> {
