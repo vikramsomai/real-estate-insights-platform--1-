@@ -56,7 +56,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           cd backend
-          pip install -r simple_requirements.txt
+          pip install -r requirements.txt
 
       - name: Test backend server
         run: |
