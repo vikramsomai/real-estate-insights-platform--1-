@@ -1,12 +1,12 @@
 
-## 🌐 Frontend (Next.js)
+##  Frontend (Next.js)
 
-### 🧩 Prerequisites
+
 
 - Node.js (v18+)
 - npm or pnpm
 
-### 🔧 Install & Run Locally
+###  Install & Run Locally
 
 ```bash
 cd frontend
