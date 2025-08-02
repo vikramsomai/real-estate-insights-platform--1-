@@ -196,18 +196,18 @@ function LoginFormComponent({ onLoginSuccess }: { onLoginSuccess: (user: any) =>
 
   return (
     <div className="ed min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 " style={{
-      backgroundImage: "url('https://lh3.googleusercontent.com/gps-cs-s/AC9h4nofbSvqhV_PYtMbYd-L10F9kYEQGw1wnaD7RTXl8TFFnvCsfAZxkQp5HVOXIcg8Nuu1oXsqrg0JpoF-XVCnkXMT6S9nWs5-BdkKLtHYdAz0tdrcDWwbGZy7tYV9OZh_ocSkc-7dwA=s1360-w1360-h1020-rw')",
+      backgroundImage: "url('background.jpeg')",
       backgroundSize: "cover",
       backgroundPosition: "center",
     }}>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="flex items-center justify-center gap-2 mb-4 flex-col">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh5zs7Bp7opJjpr6FiVvNyjKy7zzGuwwmHJejyJnCZ-g&s" className="h-14" />
-            <div>
+          <div className="flex items-center justify-center  mb-4 flex-col">
+            <img src="logo.jpeg" className="h-25 object-cover" />
+            {/* <div>
               <h1 className="text-xl font-bold text-slate-900">الفوزان القابضة</h1>
               <h1 className="text-xl font-bold text-slate-900">AL FOZEN HOLDING CO.</h1>
-            </div>
+            </div> */}
           </div>
           <CardTitle>Sign In</CardTitle>
           <p className="text-sm text-muted-foreground">Access your dashboard and analytics</p>
