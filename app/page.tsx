@@ -69,7 +69,7 @@ function DashboardContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+      <div className=" wsd min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center " >
         <LoadingSpinner />
       </div>
     )
@@ -84,7 +84,7 @@ function DashboardContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="sda min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <DashboardHeader />
 
       <main className="container mx-auto px-4 py-4 lg:py-8 space-y-6 lg:space-y-8">

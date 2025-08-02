@@ -29,7 +29,7 @@ const regionData = [
 
 export default function AnalyticsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className=" wed min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 bg-img">
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-slate-900">Analytics Dashboard</h1>

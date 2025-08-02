@@ -195,14 +195,18 @@ function LoginFormComponent({ onLoginSuccess }: { onLoginSuccess: (user: any) =>
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="ed min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 " style={{
+      backgroundImage: "url('https://lh3.googleusercontent.com/gps-cs-s/AC9h4nofbSvqhV_PYtMbYd-L10F9kYEQGw1wnaD7RTXl8TFFnvCsfAZxkQp5HVOXIcg8Nuu1oXsqrg0JpoF-XVCnkXMT6S9nWs5-BdkKLtHYdAz0tdrcDWwbGZy7tYV9OZh_ocSkc-7dwA=s1360-w1360-h1020-rw')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Shield className="h-8 w-8 text-blue-600" />
+          <div className="flex items-center justify-center gap-2 mb-4 flex-col">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh5zs7Bp7opJjpr6FiVvNyjKy7zzGuwwmHJejyJnCZ-g&s" className="h-14" />
             <div>
-              <h1 className="text-xl font-bold text-slate-900">Al Fozan Insights</h1>
-              <p className="text-sm text-slate-500">Real Estate Analytics Platform</p>
+              <h1 className="text-xl font-bold text-slate-900">الفوزان القابضة</h1>
+              <h1 className="text-xl font-bold text-slate-900">AL FOZEN HOLDING CO.</h1>
             </div>
           </div>
           <CardTitle>Sign In</CardTitle>
@@ -254,7 +258,7 @@ function LoginFormComponent({ onLoginSuccess }: { onLoginSuccess: (user: any) =>
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600"
                 >
-                  {showPassword ? "🙈" : "👁️"}
+                  {/* {showPassword ? "🙈" : "👁️"} */}
                 </button>
               </div>
             </div>

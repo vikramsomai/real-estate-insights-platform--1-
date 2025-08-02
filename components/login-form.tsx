@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { BarChart3, Lock, User, Eye, EyeOff } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import { url } from "inspector"
 
 interface LoginFormProps {
   onLoginSuccess?: (user: any) => void
@@ -71,11 +72,11 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps) {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className=" wsdewd min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 bg-img" >
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <BarChart3 className="h-8 w-8 text-blue-600" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh5zs7Bp7opJjpr6FiVvNyjKy7zzGuwwmHJejyJnCZ-g&s" />
             <div>
               <h1 className="text-xl font-bold text-slate-900">Al Fozan Insights</h1>
               <p className="text-sm text-slate-500">Real Estate Analytics Platform</p>
